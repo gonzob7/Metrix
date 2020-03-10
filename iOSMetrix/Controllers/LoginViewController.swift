@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     let userNameTextField: UITextField = {
         let field = UITextField()
         field.attributedPlaceholder = NSAttributedString(string: "Username",
-                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.60)])
         field.isSecureTextEntry = false
         field.font = UIFont(name: "Helvetica-Light", size: 18)
         field.textColor = .white
@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
         field.layer.borderColor = UIColor.white.cgColor
         field.backgroundColor = .clear
         field.textAlignment = .center
+        field.tintColor = .white
         
         return field
     }()
@@ -48,8 +49,8 @@ class LoginViewController: UIViewController {
     let passwordTextField: UITextField = {
         let field = UITextField()
         field.attributedPlaceholder = NSAttributedString(string: "Password",
-                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
-        field.isSecureTextEntry = false
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.60)])
+        field.isSecureTextEntry = true
         field.font = UIFont(name: "Helvetica-Light", size: 18)
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
@@ -58,6 +59,7 @@ class LoginViewController: UIViewController {
         field.layer.borderColor = UIColor.white.cgColor
         field.backgroundColor = .clear
         field.textAlignment = .center
+        field.tintColor = .white
         return field
     }()
     
@@ -67,8 +69,10 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helvetica-Light", size: 18)
+        button.titleLabel?.font = UIFont(name: "Helvetica-Light", size: 22)
         button.backgroundColor = UIColor(red:0.17, green:0.73, blue:0.46, alpha:1.0)
+        button.layer.applySketchShadow(color: .black, alpha: 0.50, x: 0.0, y: 2.0, blur: 4, spread: 0)
+        button.layer.masksToBounds = false
         button.layer.cornerRadius = 10
         return button
     }()
@@ -97,7 +101,6 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(logoImage)
         
-//        logoImage.heightAnchor.constraint(equalToConstant: 160).isActive = true
         logoImage.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
 
 
@@ -121,3 +124,27 @@ class LoginViewController: UIViewController {
 
 }
 
+
+extension CALayer {
+    
+      func applySketchShadow(
+        color: UIColor = .black,
+        alpha: Float = 0.5,
+        x: CGFloat = 0,
+        y: CGFloat = 2,
+        blur: CGFloat = 4,
+        spread: CGFloat = 0)
+      {   
+        shadowColor = color.cgColor
+        shadowOpacity = alpha
+        shadowOffset = CGSize(width: x, height: y)
+        shadowRadius = blur / 2.0
+        if spread == 0 {
+          shadowPath = nil
+        } else {
+          let dx = -spread
+          let rect = bounds.insetBy(dx: dx, dy: dx)
+          shadowPath = UIBezierPath(rect: rect).cgPath
+    }
+  }
+}
