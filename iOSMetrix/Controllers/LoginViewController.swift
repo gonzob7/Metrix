@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         return stackView
@@ -58,6 +58,13 @@ class LoginViewController: UIViewController {
         return logo
     }()
     
+    let logoImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let userNameTextField: UITextField = {
         let field = UITextField()
         field.attributedPlaceholder = NSAttributedString(string: "Username",
@@ -67,8 +74,10 @@ class LoginViewController: UIViewController {
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.cornerRadius = 10
+        field.layer.borderWidth = 2
+        field.layer.borderColor = UIColor.white.cgColor
+        field.backgroundColor = .clear
         field.textAlignment = .center
-        field.backgroundColor = .white
         
         return field
     }()
@@ -82,9 +91,10 @@ class LoginViewController: UIViewController {
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.cornerRadius = 10
+        field.layer.borderWidth = 2
+        field.layer.borderColor = UIColor.white.cgColor
+        field.backgroundColor = .clear
         field.textAlignment = .center
-        field.backgroundColor = .white
-        
         return field
     }()
 
@@ -105,42 +115,27 @@ class LoginViewController: UIViewController {
         
         //parent stack
         self.view.addSubview(stackView)
-        stackView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.80).isActive = true
-        stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 0.65).isActive = true
+        stackView.heightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.heightAnchor, multiplier: 0.70).isActive = true
         stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
-        //logo stack
-        self.stackView.addArrangedSubview(logoStackView)
-        logoStackView.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
-        logoStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
-        logoStackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor).isActive = true
-        logoStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        logoStackView.addArrangedSubview(logo)
-        logo.heightAnchor.constraint(equalTo: logoStackView.heightAnchor, multiplier: 0.70).isActive = true
-        logoStackView.addArrangedSubview(missionLogo)
+        stackView.addArrangedSubview(logoImage)
         
-        
-        //login stack
-        stackView.addArrangedSubview(loginStackView)
-//        loginStackView.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.50).isActive = true
-        
-        loginStackView.centerXAnchor.constraint(equalTo: self.stackView.centerXAnchor).isActive = true
-        loginStackView.addArrangedSubview(userNameTextField)
-        
-        userNameTextField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor, multiplier: 0.50).isActive = true
-        userNameTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        userNameTextField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-        
-        
-        loginStackView.addArrangedSubview(passwordTextField)
-        
-        loginStackView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
-        passwordTextField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor, multiplier: 0.50).isActive = true
-        passwordTextField.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+        logoImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        logoImage.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
 
-        passwordTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+
+        stackView.addArrangedSubview(userNameTextField)
         
+        userNameTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        userNameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
+        stackView.addArrangedSubview(passwordTextField)
+        
+        passwordTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
     }
