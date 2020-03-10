@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     let loginStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         return stackView
@@ -61,15 +61,33 @@ class LoginViewController: UIViewController {
     let userNameTextField: UITextField = {
         let field = UITextField()
         field.attributedPlaceholder = NSAttributedString(string: "Username",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
         field.isSecureTextEntry = false
         field.font = UIFont(name: "AvenirNextCondensed-DemiBold", size: 18)
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.cornerRadius = 10
         field.textAlignment = .center
+        field.backgroundColor = .white
+        
         return field
     }()
+    
+    let passwordTextField: UITextField = {
+        let field = UITextField()
+        field.attributedPlaceholder = NSAttributedString(string: "Password",
+                                                         attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
+        field.isSecureTextEntry = false
+        field.font = UIFont(name: "AvenirNextCondensed-DemiBold", size: 18)
+        field.textColor = .white
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.layer.cornerRadius = 10
+        field.textAlignment = .center
+        field.backgroundColor = .white
+        
+        return field
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +112,7 @@ class LoginViewController: UIViewController {
         //logo stack
         self.stackView.addArrangedSubview(logoStackView)
         logoStackView.heightAnchor.constraint(equalToConstant: 90.0).isActive = true
-        logoStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
+        logoStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
         logoStackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor).isActive = true
         logoStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         logoStackView.addArrangedSubview(logo)
@@ -105,10 +123,26 @@ class LoginViewController: UIViewController {
         //login stack
         stackView.addArrangedSubview(loginStackView)
 //        loginStackView.widthAnchor.constraint(equalTo: self.stackView.widthAnchor, multiplier: 0.50).isActive = true
+        
         loginStackView.centerXAnchor.constraint(equalTo: self.stackView.centerXAnchor).isActive = true
         loginStackView.addArrangedSubview(userNameTextField)
+        
         userNameTextField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor, multiplier: 0.50).isActive = true
         userNameTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        userNameTextField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+        
+        
+        loginStackView.addArrangedSubview(passwordTextField)
+        
+        loginStackView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
+        passwordTextField.widthAnchor.constraint(equalTo: self.loginStackView.widthAnchor, multiplier: 0.50).isActive = true
+        passwordTextField.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+
+        passwordTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+        
+        
+        
     }
 
 
