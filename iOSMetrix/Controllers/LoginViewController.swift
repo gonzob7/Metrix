@@ -19,45 +19,8 @@ class LoginViewController: UIViewController {
         stackView.distribution = .fill
         return stackView
     }()
-    
-    let loginStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
-        return stackView
-    }()
-    
-    let logoStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 0
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fill
-        return stackView
-    }()
 
-    let logo: UILabel = {
-        let logo = UILabel()
-        logo.font = UIFont(name: "HelveticaNeue-UltraLight", size: 75)
-        logo.text = "Metrix"
-        logo.textColor = .white
-        logo.textAlignment = .center
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        return logo
-    }()
-    
-    let missionLogo: UILabel = {
-        let logo = UILabel()
-        logo.font = UIFont(name: "HelveticaNeue-UltraLight", size: 20)
-        logo.text = "Toss the Excel sheet"
-        logo.textColor = .white
-        logo.textAlignment = .center
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        return logo
-    }()
-    
+        
     let logoImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -70,11 +33,11 @@ class LoginViewController: UIViewController {
         field.attributedPlaceholder = NSAttributedString(string: "Username",
                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
         field.isSecureTextEntry = false
-        field.font = UIFont(name: "AvenirNextCondensed-DemiBold", size: 18)
+        field.font = UIFont(name: "Helvetica-Light", size: 18)
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.cornerRadius = 10
-        field.layer.borderWidth = 2
+        field.layer.borderWidth = 1.35
         field.layer.borderColor = UIColor.white.cgColor
         field.backgroundColor = .clear
         field.textAlignment = .center
@@ -87,15 +50,27 @@ class LoginViewController: UIViewController {
         field.attributedPlaceholder = NSAttributedString(string: "Password",
                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.80)])
         field.isSecureTextEntry = false
-        field.font = UIFont(name: "AvenirNextCondensed-DemiBold", size: 18)
+        field.font = UIFont(name: "Helvetica-Light", size: 18)
         field.textColor = .white
         field.translatesAutoresizingMaskIntoConstraints = false
         field.layer.cornerRadius = 10
-        field.layer.borderWidth = 2
+        field.layer.borderWidth = 1.35
         field.layer.borderColor = UIColor.white.cgColor
         field.backgroundColor = .clear
         field.textAlignment = .center
         return field
+    }()
+    
+    
+    let loginBtn: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Login", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helvetica-Light", size: 18)
+        button.backgroundColor = UIColor(red:0.17, green:0.73, blue:0.46, alpha:1.0)
+        button.layer.cornerRadius = 10
+        return button
     }()
 
     
@@ -115,28 +90,31 @@ class LoginViewController: UIViewController {
         
         //parent stack
         self.view.addSubview(stackView)
-        stackView.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 0.65).isActive = true
-        stackView.heightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.heightAnchor, multiplier: 0.70).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: self.view.layoutMarginsGuide.widthAnchor, multiplier: 0.75).isActive = true
+        stackView.heightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.heightAnchor, multiplier: 0.60).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 150).isActive = true
         
         stackView.addArrangedSubview(logoImage)
         
-        logoImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+//        logoImage.heightAnchor.constraint(equalToConstant: 160).isActive = true
         logoImage.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
 
 
         stackView.addArrangedSubview(userNameTextField)
         
         userNameTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        userNameTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        userNameTextField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
         
         stackView.addArrangedSubview(passwordTextField)
         
         passwordTextField.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
-        passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
+        stackView.addArrangedSubview(loginBtn)
+        loginBtn.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        loginBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
     }
 
